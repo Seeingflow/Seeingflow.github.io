@@ -543,6 +543,28 @@ h3 { font-size: 21px; }
   margin-bottom: 10px;
   break-inside: avoid;
 }
+.contact-request-section {
+  padding-top: 0;
+}
+.contact-request-form {
+  max-width: 760px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding: 28px;
+  border: 1px solid var(--grey-2);
+  background: var(--grey);
+}
+.contact-request-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--blue);
+  font-weight: 500;
+}
+.contact-request-form label:has(textarea),
+.contact-request-form .button {
+  grid-column: 1 / -1;
+}
 .case-hero {
   position: relative;
   min-height: 520px;
@@ -884,6 +906,9 @@ textarea { min-height: 124px; resize: vertical; }
   .detail-list { columns: 1; }
   .case-content,
   .case-layout-panel .case-content {
+    grid-template-columns: 1fr;
+  }
+  .contact-request-form {
     grid-template-columns: 1fr;
   }
   .case-layout-panel .case-aside {

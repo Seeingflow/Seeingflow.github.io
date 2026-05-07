@@ -85,8 +85,8 @@
             <h2 id="contactTitle"></h2>
             <p id="contactText"></p>
           </div>
-          <form class="newsletter">
-            <input type="email" placeholder="Work email" aria-label="Work email">
+          <form class="newsletter" data-request-form data-form-type="Keep in touch">
+            <input type="email" name="email" placeholder="Work email" aria-label="Work email" required>
             <button class="button" type="submit">Subscribe</button>
           </form>
         </div>
@@ -105,6 +105,7 @@
     </footer>
 
     <script src="site-data.js"></script>
+    <script src="request-submit.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

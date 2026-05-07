@@ -44,7 +44,8 @@ const DEFAULT_SITE_DATA = {
   contact: {
     title: "Register for updates and product news",
     text: "Use this area for newsletter, sales, demo, or support contact details.",
-    recipientEmail: "sales@seeingflow.com"
+    recipientEmail: "sales@seeingflow.com",
+    formEndpoint: ""
   },
   about: {
     title: "About us",

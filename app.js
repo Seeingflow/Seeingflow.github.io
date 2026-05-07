@@ -117,37 +117,6 @@ function renderFooter() {
   `).join("");
 }
 
-document.querySelector(".newsletter").addEventListener("submit", (event) => {
-  event.preventDefault();
-  const input = event.currentTarget.querySelector("input[type='email']");
-  const email = input.value.trim();
-  if (!email) return;
-  const createdAt = new Date().toISOString();
-  const subscribers = JSON.parse(localStorage.getItem("newsletterSubscribers") || "[]");
-  subscribers.push({ email, createdAt });
-  localStorage.setItem("newsletterSubscribers", JSON.stringify(subscribers));
-  event.currentTarget.reset();
-  const recipient = data.contact?.recipientEmail || "sales@seeingflow.com";
-  const subject = "New website keep-in-touch request";
-  const body = [
-    "Hello SeeingFlow Sales Team,",
-    "",
-    "A new visitor submitted the Keep in touch form on the website.",
-    "",
-    `Visitor email: ${email}`,
-    `Submitted at: ${createdAt}`,
-    `Source page: ${window.location.href}`,
-    "",
-    "Suggested follow-up:",
-    "- Add the contact to the newsletter or CRM list.",
-    "- Send a short introduction and ask whether they would like a product demo.",
-    "",
-    "This message was generated from the website contact form."
-  ].join("\n");
-  window.location.href = `mailto:${encodeURIComponent(recipient)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  alert("Thank you. Your email has been saved locally and an email draft has been opened for submission.");
-});
-
 renderLogo();
 renderNavigation();
 renderHero();
