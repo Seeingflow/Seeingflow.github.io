@@ -101,3 +101,6 @@ function renderDetail() {
 
 renderShell();
 renderDetail();
+if (typeof attachRequestForms === "function") {
+  attachRequestForms();
+}
