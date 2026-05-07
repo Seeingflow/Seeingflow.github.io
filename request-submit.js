@@ -1,3 +1,5 @@
+const DEFAULT_FORM_ENDPOINT = "https://formspree.io/f/mzdoazrg";
+
 function attachRequestForms() {
   document.querySelectorAll("[data-request-form]").forEach((form) => {
     if (form.dataset.bound === "true") return;
@@ -29,7 +31,7 @@ function attachRequestForms() {
       subscribers.push({ email: payload.email, createdAt, formType: payload.formType });
       localStorage.setItem("newsletterSubscribers", JSON.stringify(subscribers));
 
-      const endpoint = data.contact?.formEndpoint || "";
+      const endpoint = data.contact?.formEndpoint || DEFAULT_FORM_ENDPOINT;
       if (endpoint) {
         try {
           const response = await fetch(endpoint, {
@@ -43,22 +45,10 @@ function attachRequestForms() {
           return;
         } catch (error) {
           console.error(error);
-          alert("The automatic email service could not be reached. An email draft will open instead.");
+          alert("The automatic email service could not be reached. Please try again later.");
+          return;
         }
       }
-
-      const subject = `New website request: ${payload.formType}`;
-      const body = [
-        "Hello SeeingFlow Sales Team,",
-        "",
-        "A new visitor submitted a website request.",
-        "",
-        ...Object.entries(payload).map(([key, value]) => `${key}: ${value}`),
-        "",
-        "This message was generated from the website form."
-      ].join("\n");
-      window.location.href = `mailto:${encodeURIComponent(payload.recipient)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      form.reset();
     });
   });
 }
