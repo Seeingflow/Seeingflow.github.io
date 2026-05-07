@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Building Management Software</title>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Home">
+        <img id="logoImage" alt="">
+        <span id="brandName"></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">Menu</button>
+      <nav class="main-nav" id="mainNav"></nav>
+      <div class="header-actions">
+        <a class="button small" id="headerCta" href="#contact"></a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero nd-large-banner">
+        <div class="hero-media">
+          <img id="heroImage" alt="">
+        </div>
+        <div class="hero-intro">
+          <p class="eyebrow" id="heroEyebrow"></p>
+          <h1 id="heroTitle"></h1>
+          <div class="hero-actions">
+            <a class="button" id="primaryCta" href="#contact"></a>
+            <a class="text-link" id="secondaryCta" href="#solutions"></a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <p id="heroText"></p>
+        </div>
+      </section>
+
+      <section class="logo-strip" aria-label="Client logos">
+        <div class="logo-slider" aria-hidden="true">
+          <div class="logo-track" id="clientLogos"></div>
+        </div>
+      </section>
+
+      <section class="resources section-band" id="resources">
+        <div class="section-heading">
+          <span class="eyebrow">Latest resources</span>
+          <h2 id="resourcesTitle"></h2>
+        </div>
+        <div class="resource-grid" id="resourceGrid"></div>
+      </section>
+
+      <section class="solutions" id="solutions">
+        <div class="section-copy">
+          <span class="eyebrow">Explore solutions</span>
+          <h2 id="solutionsTitle"></h2>
+          <p id="solutionsIntro"></p>
+        </div>
+        <div class="solution-grid" id="solutionGrid"></div>
+      </section>
+
+      <section class="about-section" id="about">
+        <div class="section-heading">
+          <span class="eyebrow">About us</span>
+          <h2 id="aboutTitle"></h2>
+          <p id="aboutIntro"></p>
+        </div>
+        <div class="about-card-grid" id="aboutCardGrid"></div>
+      </section>
+
+      <section class="customers" id="stories">
+        <div class="section-heading">
+          <span class="eyebrow">Customer stories</span>
+          <h2 id="customersTitle"></h2>
+        </div>
+        <div class="story-grid" id="storyGrid"></div>
+      </section>
+
+      <section class="contact-band" id="contact">
+        <div class="contact-inner">
+          <div>
+            <span class="eyebrow">Keep in touch</span>
+            <h2 id="contactTitle"></h2>
+            <p id="contactText"></p>
+          </div>
+          <form class="newsletter">
+            <input type="email" placeholder="Work email" aria-label="Work email">
+            <button class="button" type="submit">Subscribe</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="footer">
+      <div class="footer-brand">
+        <h2 id="footerBrand"></h2>
+        <p id="footerText"></p>
+      </div>
+      <div class="footer-columns" id="footerColumns"></div>
+      <div class="footer-bottom">
+        <span id="copyright"></span>
+      </div>
+    </footer>
+
+    <script src="site-data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
