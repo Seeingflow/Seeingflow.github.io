@@ -45,7 +45,7 @@ const DEFAULT_SITE_DATA = {
     title: "Register for updates and product news",
     text: "Use this area for newsletter, sales, demo, or support contact details.",
     recipientEmail: "sales@seeingflow.com",
-    formEndpoint: ""
+    formEndpoint: "https://formspree.io/f/mzdoazrg"
   },
   about: {
     title: "About us",
