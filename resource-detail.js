@@ -22,7 +22,10 @@ function renderShell() {
   } else {
     logo.hidden = true;
   }
-  $("mainNav").innerHTML = data.menu.map((item) => `<a href="index.html${esc(item.href)}">${esc(item.label)}</a>`).join("");
+  $("mainNav").innerHTML = data.menu.map((item) => {
+    const href = item.label.toLowerCase().includes("contact") ? "contact-us.html" : `index.html${item.href}`;
+    return `<a href="${esc(href)}">${esc(item.label)}</a>`;
+  }).join("");
   text("headerCta", data.headerCta);
   text("footerBrand", data.brandName);
   text("footerText", data.footerText);

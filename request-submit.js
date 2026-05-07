@@ -36,8 +36,13 @@ function attachRequestForms() {
         try {
           const response = await fetch(endpoint, {
             method: "POST",
-            headers: { "Accept": "application/json", "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
+            headers: { "Accept": "application/json" },
+            body: (() => {
+              const outgoing = new FormData();
+              Object.entries(payload).forEach(([key, value]) => outgoing.append(key, value));
+              outgoing.append("_subject", `New website request: ${payload.formType}`);
+              return outgoing;
+            })()
           });
           if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
           form.reset();

@@ -21,7 +21,8 @@ function renderShell() {
     logo.hidden = true;
   }
   $("mainNav").innerHTML = data.menu.map((item) => {
-    const href = item.label.toLowerCase().includes("about") ? "index.html#about" : item.href;
+    const lower = item.label.toLowerCase();
+    const href = lower.includes("about") ? "index.html#about" : lower.includes("contact") ? "contact-us.html" : `index.html${item.href}`;
     return `<a href="${esc(href)}">${esc(item.label)}</a>`;
   }).join("");
   text("headerCta", data.headerCta);

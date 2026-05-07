@@ -25,7 +25,8 @@ function renderLogo() {
 function renderNavigation() {
   $("mainNav").innerHTML = data.menu.map((item) => {
     const href = item.label.toLowerCase().includes("about") && item.href === "#footer" ? "#about" : item.href;
-    return `<a href="${esc(href)}">${esc(item.label)}</a>`;
+    const finalHref = item.label.toLowerCase().includes("contact") ? "contact-us.html" : href;
+    return `<a href="${esc(finalHref)}">${esc(item.label)}</a>`;
   }).join("");
   text("headerCta", data.headerCta);
   $("headerCta").href = "#contact";
