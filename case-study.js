@@ -22,11 +22,12 @@ function renderShell() {
   } else {
     logo.hidden = true;
   }
-  $("mainNav").innerHTML = data.menu.map((item) => {
-    const href = item.label.toLowerCase().includes("contact") ? "contact-us.html" : `index.html${item.href}`;
+  $("mainNav").innerHTML = data.menu.filter((item) => !item.label.toLowerCase().includes("contact")).map((item) => {
+    const href = `index.html${item.href}`;
     return `<a href="${esc(href)}">${esc(item.label)}</a>`;
   }).join("");
-  text("headerCta", data.headerCta);
+  text("headerCta", "Contact us");
+  $("headerCta").href = "contact-us.html";
   text("footerBrand", data.brandName);
   text("footerText", data.footerText);
   text("copyright", `© ${new Date().getFullYear()} ${data.brandName}`);

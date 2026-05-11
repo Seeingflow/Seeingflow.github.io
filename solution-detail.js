@@ -22,11 +22,12 @@ function renderShell() {
   } else {
     logo.hidden = true;
   }
-  $("mainNav").innerHTML = data.menu.map((item) => {
-    const href = item.label.toLowerCase().includes("contact") ? "contact-us.html" : `index.html${item.href}`;
+  $("mainNav").innerHTML = data.menu.filter((item) => !item.label.toLowerCase().includes("contact")).map((item) => {
+    const href = `index.html${item.href}`;
     return `<a href="${esc(href)}">${esc(item.label)}</a>`;
   }).join("");
-  text("headerCta", data.headerCta);
+  text("headerCta", "Contact us");
+  $("headerCta").href = "contact-us.html";
   text("footerBrand", data.brandName);
   text("footerText", data.footerText);
   text("copyright", `© ${new Date().getFullYear()} ${data.brandName}`);
@@ -44,6 +45,7 @@ function renderShell() {
 
 function renderSolution() {
   const layout = ["split", "panel", "editorial"].includes(solution.layout) ? solution.layout : "split";
+  const relatedResources = Array.isArray(solution.relatedResources) ? solution.relatedResources : [];
   document.body.classList.add(`case-layout-${layout}`);
   document.title = `${solution.title} | Solution`;
   text("solutionBreadcrumb", solution.title);
@@ -53,6 +55,13 @@ function renderSolution() {
   text("solutionBody", solution.body || solution.text || "Add the full solution detail body from the admin portal.");
   $("solutionImage").src = solution.image || data.hero.image;
   $("solutionImage").alt = solution.title;
+  $("relatedResources").innerHTML = relatedResources.length
+    ? relatedResources.map((resource) => `
+      <a class="related-resource-card" href="${esc(resource.href)}">
+        <strong>${esc(resource.title)}</strong>
+      </a>
+    `).join("")
+    : `<a class="related-resource-card" href="index.html#resources"><strong>Browse all resources</strong></a>`;
 }
 
 renderShell();

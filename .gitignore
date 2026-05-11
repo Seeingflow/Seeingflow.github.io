@@ -1,2 +1,4 @@
 admin.html
 admin.js
+.DS_Store
+upload-server.js

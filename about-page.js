@@ -20,13 +20,13 @@ function renderShell() {
   } else {
     logo.hidden = true;
   }
-  $("mainNav").innerHTML = data.menu.map((item) => {
+  $("mainNav").innerHTML = data.menu.filter((item) => !item.label.toLowerCase().includes("contact")).map((item) => {
     const lower = item.label.toLowerCase();
-    const href = lower.includes("about") ? "index.html#about" : lower.includes("contact") ? "contact-us.html" : `index.html${item.href}`;
+    const href = lower.includes("about") ? "index.html#about" : `index.html${item.href}`;
     return `<a href="${esc(href)}">${esc(item.label)}</a>`;
   }).join("");
-  text("headerCta", data.headerCta);
-  $("headerCta").href = "index.html#contact";
+  text("headerCta", "Contact us");
+  $("headerCta").href = "contact-us.html";
   text("footerBrand", data.brandName);
   text("footerText", data.footerText);
   text("copyright", `© ${new Date().getFullYear()} ${data.brandName}`);
@@ -60,7 +60,25 @@ function renderDetail() {
       eyebrow: "Company history",
       title: about.historyTitle,
       intro: "A concise view of how the company began and where it is going.",
-      body: `<p>${esc(about.historyText)}</p>`
+      body: `
+        <p class="history-intro">${esc(about.historyText)}</p>
+        <div class="history-timeline">
+          ${(about.historyTimeline || []).map((item) => `
+            <article class="timeline-item">
+              <div class="timeline-marker">
+                <span>${esc(item.time)}</span>
+              </div>
+              <div class="timeline-card">
+                ${item.image ? `<img src="${esc(item.image)}" alt="${esc(item.time)} company milestone">` : ""}
+                <div>
+                  <h3>${esc(item.time)}</h3>
+                  <p>${esc(item.event)}</p>
+                </div>
+              </div>
+            </article>
+          `).join("")}
+        </div>
+      `
     },
     leadership: {
       eyebrow: "Leadership team",
@@ -77,20 +95,31 @@ function renderDetail() {
     contact: {
       eyebrow: "Contact us",
       title: about.contactsTitle,
-      intro: "Office contacts, locations, email addresses, phone details, and global office footprint.",
+      intro: "Primary office contacts and global locations.",
       body: `
         <div class="detail-map-frame ${about.mapImage ? "has-image" : ""}">
           ${about.mapImage ? `<img src="${esc(about.mapImage)}" alt="Company global office map">` : `<span>${esc(about.mapImageSize)}</span>`}
         </div>
-        <ul class="detail-list">${about.officeLocations.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>
-        <div class="contact-list-grid detail-contact-grid">${about.contacts.map((contact) => `
-        <article class="office-contact-card">
-          <h4>${esc(contact.office)}</h4>
-          <p>${esc(contact.location)}</p>
-          <a href="mailto:${esc(contact.email)}">${esc(contact.email)}</a>
-          <span>${esc(contact.phone)}</span>
-        </article>
-      `).join("")}</div>`
+        <div class="featured-contact-grid">${about.contacts.map((contact) => `
+          <article class="featured-contact-card">
+            <span>${esc(contact.location)}</span>
+            <h3>${esc(contact.office)}</h3>
+            <dl>
+              <div>
+                <dt>Address</dt>
+                <dd>${esc(contact.address || contact.location)}</dd>
+              </div>
+              <div>
+                <dt>Email</dt>
+                <dd><a href="mailto:${esc(contact.email)}">${esc(contact.email)}</a></dd>
+              </div>
+            </dl>
+          </article>
+        `).join("")}</div>
+        <section class="global-office-list" aria-label="Other global office locations">
+          <h3>Global offices and contacts</h3>
+          <ul>${about.officeLocations.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>
+        </section>`
     }
   };
   const detail = details[pageType];
