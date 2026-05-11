@@ -59,7 +59,7 @@ function renderLists() {
   text("resourcesTitle", data.resourcesTitle);
   $("resourceGrid").innerHTML = getFeaturedResourceCards().map(({ item, index, label }) => `
     <a class="resource-card" href="${esc(getResourceHref(item, index))}" ${getDocumentLinkAttributes(item)}>
-      ${item.image ? `<img src="${esc(item.image)}" alt="${esc(item.title)}">` : ""}
+      ${getResourceImage(item) ? `<img src="${esc(getResourceImage(item))}" alt="${esc(item.title)}">` : ""}
       <div>
         <span>${esc(label)}</span>
         <h3>${esc(item.title)}</h3>
@@ -96,6 +96,14 @@ function normalizeCategory(value = "") {
 
 function isDocumentResource(item) {
   return normalizeCategory(item?.type) === "documents";
+}
+
+function getResourceImage(item) {
+  if (item?.image) return item.image;
+  if (isDocumentResource(item)) {
+    return "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=1200&q=80";
+  }
+  return "";
 }
 
 function getDownloadFileName(item) {

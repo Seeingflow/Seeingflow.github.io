@@ -96,7 +96,7 @@ const DEFAULT_SITE_DATA = {
       "type": "Documents",
       "title": "Seeingflow Smart Carpark Solution",
       "text": "A ppt deck in pdf format updated in Jan 2026.",
-      "image": "",
+      "image": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=1200&q=80",
       "body": "documents/sfd-scs-2601.pdf",
       "layout": "split"
     }
