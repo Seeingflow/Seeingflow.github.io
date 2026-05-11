@@ -25,12 +25,13 @@ function redirectCategoryResource() {
 
 function renderShell() {
   const logo = $("logoImage");
-  text("brandName", data.brandName);
   if (data.logo) {
+    text("brandName", "");
     logo.src = data.logo;
     logo.alt = `${data.brandName} logo`;
     logo.hidden = false;
   } else {
+    text("brandName", "");
     logo.hidden = true;
   }
   $("mainNav").innerHTML = data.menu.filter((item) => !item.label.toLowerCase().includes("contact")).map((item) => {

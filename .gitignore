@@ -5,4 +5,4 @@ upload-server.js
 export-local-data.html
 local-site-data-export.json
 sync-local-data.mjs
-assets/logos/
+update-local-data.html

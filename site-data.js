@@ -31,33 +31,33 @@ const DEFAULT_SITE_DATA = {
   "clientLogos": [
     {
       "name": "CR Longdation",
-      "image": "https://www.crproperty.com.hk/en/logo/2025-01-15/33d0f654-9e9e-4af8-9327-f409736fc869.png",
-      "href": "Case 1"
+      "image": "assets/logos/client-01.png",
+      "href": "case-study.html?case=0"
     },
     {
       "name": "JLL",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/8/83/JLL_logo.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
-      "href": "Case 2"
+      "image": "assets/logos/client-02.png",
+      "href": "case-study.html?case=1"
     },
     {
       "name": "China Unicom",
-      "image": "https://www.chinaunicom.com.cn/_nuxt/img/logo.2d0447c.png",
-      "href": "Case 3"
+      "image": "assets/logos/client-03.png",
+      "href": "case-study.html?case=2"
     },
     {
       "name": "Yian",
-      "image": "https://www.aimgroupcn.com/images/logo.png",
-      "href": "Case 4"
+      "image": "assets/logos/client-04.png",
+      "href": "case-study.html?case=3"
     },
     {
       "name": "CPSC",
-      "image": "https://cpsc.hk/wp-content/uploads/2018/11/logo-2.png",
-      "href": "Case 5"
+      "image": "assets/logos/client-05.png",
+      "href": "case-study.html?case=4"
     },
     {
       "name": "Onewo",
-      "image": "https://upload.wikimedia.org/wikipedia/zh/thumb/b/b3/SpaceTECH_logo.svg/500px-SpaceTECH_logo.svg.png",
-      "href": "Case 6"
+      "image": "assets/logos/client-06.png",
+      "href": "case-study.html?case=5"
     }
   ],
   "resourcesTitle": "Browse our latest resources",

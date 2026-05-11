@@ -18,7 +18,7 @@ function renderLogo() {
     logo.alt = `${data.brandName} logo`;
     logo.hidden = false;
   } else {
-    text("brandName", data.brandName);
+    text("brandName", "");
     logo.hidden = true;
   }
 }
