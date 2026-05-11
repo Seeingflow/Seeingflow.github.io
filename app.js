@@ -101,7 +101,7 @@ function isDocumentResource(item) {
 function getResourceImage(item) {
   if (item?.image) return item.image;
   if (isDocumentResource(item)) {
-    return "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=1200&q=80";
+    return "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80";
   }
   return "";
 }
