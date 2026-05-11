@@ -2,3 +2,7 @@ admin.html
 admin.js
 .DS_Store
 upload-server.js
+export-local-data.html
+local-site-data-export.json
+sync-local-data.mjs
+assets/logos/

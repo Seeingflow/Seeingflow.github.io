@@ -12,12 +12,13 @@ const esc = (value = "") => String(value).replace(/[&<>"']/g, (char) => ({
 
 function renderLogo() {
   const logo = $("logoImage");
-  text("brandName", data.brandName);
   if (data.logo) {
+    text("brandName", "");
     logo.src = data.logo;
     logo.alt = `${data.brandName} logo`;
     logo.hidden = false;
   } else {
+    text("brandName", data.brandName);
     logo.hidden = true;
   }
 }
