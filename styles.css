@@ -53,12 +53,13 @@ h3 { font-size: 21px; }
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 0;
   color: var(--blue);
   font-size: 1.45rem;
   font-weight: 700;
 }
 .brand img { max-width: 220px; max-height: 56px; object-fit: contain; }
+.site-header .brand span { display: none; }
 .main-nav {
   display: flex;
   justify-content: center;
