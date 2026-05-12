@@ -331,9 +331,32 @@ const DEFAULT_SITE_DATA = {
 
 const SITE_DATA_KEY = "siteDataPlanonModelV4";
 
+function mergeSiteData(defaults, saved) {
+  if (Array.isArray(defaults)) {
+    return Array.isArray(saved) && saved.length ? saved : structuredClone(defaults);
+  }
+  if (defaults && typeof defaults === "object") {
+    const merged = {};
+    Object.keys(defaults).forEach((key) => {
+      merged[key] = mergeSiteData(defaults[key], saved?.[key]);
+    });
+    if (saved && typeof saved === "object" && !Array.isArray(saved)) {
+      Object.keys(saved).forEach((key) => {
+        if (!(key in merged)) merged[key] = saved[key];
+      });
+    }
+    return merged;
+  }
+  return saved ?? defaults;
+}
+
 function getSiteData() {
-  const saved = localStorage.getItem(SITE_DATA_KEY);
-  return saved ? JSON.parse(saved) : structuredClone(DEFAULT_SITE_DATA);
+  try {
+    const saved = localStorage.getItem(SITE_DATA_KEY);
+    return saved ? mergeSiteData(DEFAULT_SITE_DATA, JSON.parse(saved)) : structuredClone(DEFAULT_SITE_DATA);
+  } catch {
+    return structuredClone(DEFAULT_SITE_DATA);
+  }
 }
 
 function saveSiteData(data) {

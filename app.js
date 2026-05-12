@@ -318,7 +318,7 @@ function getFooterLinkParts(link) {
 function footerLinkHtml(link) {
   const { label, href } = getFooterLinkParts(link);
   if (!label) return "";
-  const external = /^https?:///i.test(href);
+  const external = /^https?:\/\//i.test(href);
   return `<a href="${esc(href)}" ${external ? 'target="_blank" rel="noopener"' : ""}>${esc(label)}</a>`;
 }
 
