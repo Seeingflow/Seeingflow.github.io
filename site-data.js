@@ -99,7 +99,7 @@ const DEFAULT_SITE_DATA = {
       "title": "Seeingflow General Introduction",
       "text": "A ppt deck that introduces Seeingflow, pdf format, updated in Mar 2026.",
       "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
-      "body": "documents/sfd-scs-2601.pdf",
+      "body": "documents/sfd-intro-2603.pdf",
       "layout": "split",
       "date": "2026-03"
     },
@@ -117,7 +117,7 @@ const DEFAULT_SITE_DATA = {
       "title": "Seeingflow SaaS User Guide",
       "text": "A manual that illustrates details of using our SaaS to manage and operate places, pdf format, updated in Mar 2025.",
       "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
-      "body": "documents/sfd-scs-2601.pdf",
+      "body": "documents/sfd-sm-2503.pdf",
       "layout": "split",
       "date": "2025-03"
     },
@@ -126,7 +126,7 @@ const DEFAULT_SITE_DATA = {
       "title": "Seeingflow IOT Platform White Paper",
       "text": "A white paper that explains our powerful IOT platform that builds foundations PSIM, BMS, and other smart projects, pdf format, updated in Dec 2024.",
       "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
-      "body": "documents/sfd-scs-2601.pdf",
+      "body": "documents/sfd-wp-iot-2412.pdf",
       "layout": "split",
       "date": "2024-12"
     },
@@ -135,7 +135,7 @@ const DEFAULT_SITE_DATA = {
       "title": "Seeingflow AI Camera Solution White Paper",
       "text": "A white paper that explains how AI empowers existing cameras with smart capabilities, pdf format, updated in Jul 2024.",
       "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
-      "body": "documents/sfd-scs-2601.pdf",
+      "body": "documents/sfd-wp-ac-2407.pdf",
       "layout": "split",
       "date": "2024-07"
     }
@@ -424,6 +424,9 @@ function mergeSiteData(defaults, saved) {
 }
 
 function getSiteData() {
+  if (window.location.protocol !== "file:") {
+    return structuredClone(DEFAULT_SITE_DATA);
+  }
   try {
     const saved = localStorage.getItem(SITE_DATA_KEY);
     return saved ? mergeSiteData(DEFAULT_SITE_DATA, JSON.parse(saved)) : structuredClone(DEFAULT_SITE_DATA);
