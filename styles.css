@@ -1170,12 +1170,17 @@ textarea { min-height: 124px; resize: vertical; }
   flex-wrap: wrap;
   gap: 10px;
 }
-.social-links a {
+.social-links a,
+.footer-columns .social-links a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 38px;
+  min-width: 38px;
+  max-width: 38px;
   height: 38px;
+  min-height: 38px;
+  flex: 0 0 38px;
   border: 1px solid var(--line);
   background: #fff;
   color: var(--blue);
@@ -1184,9 +1189,15 @@ textarea { min-height: 124px; resize: vertical; }
   border-color: var(--green);
   color: var(--green);
 }
-.social-links svg {
+.social-links svg,
+.footer-columns .social-links svg {
+  display: block;
   width: 20px;
+  min-width: 20px;
+  max-width: 20px;
   height: 20px;
+  min-height: 20px;
+  max-height: 20px;
   fill: currentColor;
 }
 .footer-bottom {
