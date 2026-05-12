@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Client Success Stories</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Home"><img id="logoImage" alt=""><span id="brandName"></span></a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">Menu</button>
+      <nav class="main-nav" id="mainNav"></nav>
+      <div class="header-actions"><a class="button small" id="headerCta" href="contact-us.html"></a></div>
+    </header>
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><div><a href="index.html">Home</a><a href="index.html#stories">Client cases</a><span>Success stories</span></div></nav>
+    <main>
+      <section class="repository-hero">
+        <div>
+          <h1>Client success stories</h1>
+          <p>Browse customer stories and implementation examples across smart place operations, asset management and connected facilities.</p>
+        </div>
+      </section>
+      <section class="document-repository">
+        <div class="document-repository-header">
+          <h2>Featured implementations</h2>
+          <p id="caseCount"></p>
+        </div>
+        <div class="document-list" id="caseList"></div>
+      </section>
+    </main>
+    <footer class="site-footer" id="footer"><div class="footer-brand"><h2 id="footerBrand"></h2><p id="footerText"></p></div><div class="footer-columns" id="footerColumns"></div><div class="footer-bottom"><span id="copyright"></span></div></footer>
+    <script src="site-data.js"></script><script src="request-submit.js?v=3"></script>
+    <script src="case-list.js"></script>
+  </body>
+</html>

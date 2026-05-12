@@ -43,7 +43,7 @@ function renderHero() {
   text("heroTitle", data.hero.title);
   text("heroText", data.hero.text);
   text("primaryCta", data.hero.primaryCta);
-  $("primaryCta").href = "#contact";
+  $("primaryCta").href = "#footer";
   text("secondaryCta", data.hero.secondaryCta);
 }
 
@@ -58,36 +58,57 @@ function renderLists() {
   trimClientLogoImages();
   text("resourcesTitle", data.resourcesTitle);
   $("resourceGrid").innerHTML = getFeaturedResourceCards().map(({ item, index, label }) => `
-    <a class="resource-card" href="${esc(getResourceHref(item, index))}" ${getDocumentLinkAttributes(item)}>
-      ${getResourceImage(item) ? `<img src="${esc(getResourceImage(item))}" alt="${esc(item.title)}">` : ""}
-      <div>
+    <article class="resource-card">
+      <a class="resource-card-main" href="${esc(getResourceItemHref(item, index))}" ${getResourceItemAttributes(item)}>
+        ${getResourceImage(item) ? `<img src="${esc(getResourceImage(item))}" alt="${esc(item.title)}">` : ""}
         <span>${esc(label)}</span>
         <h3>${esc(item.title)}</h3>
         <p>${esc(item.text)}</p>
-        <strong>${isDocumentResource(item) ? "Download" : "Read more"}</strong>
+      </a>
+      <div>
+        <a class="resource-more-link" href="${esc(getResourceRepositoryHref(item, label))}">${esc(getResourceMoreLabel(label))}</a>
       </div>
-    </a>
+    </article>
   `).join("");
   prepareLocalDocumentLinks();
   text("solutionsTitle", data.solutionsTitle);
   $("solutionGrid").innerHTML = data.solutions.map((item, index) => `
-    <a class="solution-card" href="solution-detail.html?solution=${index}">
-      ${item.image ? `<img src="${esc(item.image)}" alt="${esc(item.title)}">` : ""}
-      <div>
-        <h3>${esc(item.title)}</h3>
-        <p>${esc(item.text)}</p>
-        <span>Learn more</span>
+    <article class="solution-card">
+      <a class="solution-card-main" href="solution-detail.html?solution=${index}">
+        ${item.image ? `<img src="${esc(item.image)}" alt="${esc(item.title)}">` : ""}
+        <div>
+          <h3>${esc(item.title)}</h3>
+          <p>${esc(item.text)}</p>
+        </div>
+      </a>
+      <div class="solution-card-footer">
+        <a class="solution-more-link" href="solution-list.html">Learn more</a>
       </div>
-    </a>
+    </article>
   `).join("");
   text("customersTitle", data.customersTitle);
-  $("storyGrid").innerHTML = data.stories.map((story, index) => `
-    <a class="story-card" href="case-study.html?case=${index}">
-      <img src="${esc(story.image)}" alt="${esc(story.title)}">
-      <h3>${esc(story.title)}</h3>
-      <span>Explore now</span>
-    </a>
+  $("storyGrid").innerHTML = getFeaturedStories().map(({ story, index }) => `
+    <article class="story-card">
+      <a class="story-card-main" href="case-study.html?case=${index}">
+        <img src="${esc(story.image)}" alt="${esc(story.title)}">
+        <h3>${esc(story.title)}</h3>
+      </a>
+      <div class="story-card-footer">
+        <a class="story-more-link" href="case-list.html">Explore more</a>
+      </div>
+    </article>
   `).join("");
+}
+
+function getFeaturedStories() {
+  const stories = data.stories || [];
+  const indexes = Array.isArray(data.featuredStoryIndexes) && data.featuredStoryIndexes.length
+    ? data.featuredStoryIndexes
+    : [0, 1, 2];
+  return indexes
+    .map((index) => ({ index: Number(index), story: stories[Number(index)] }))
+    .filter((item) => item.story)
+    .slice(0, 3);
 }
 
 function normalizeCategory(value = "") {
@@ -113,8 +134,12 @@ function getDownloadFileName(item) {
 }
 
 function getDocumentLinkAttributes(item) {
+  return "";
+}
+
+function getResourceItemAttributes(item) {
   if (!isDocumentResource(item)) return "";
-  return `data-document-resource download="${esc(getDownloadFileName(item))}" target="_blank" rel="noopener"`;
+  return `download="${esc(getDownloadFileName(item))}" target="_blank" rel="noopener"`;
 }
 
 function prepareLocalDocumentLinks() {
@@ -124,12 +149,24 @@ function prepareLocalDocumentLinks() {
   });
 }
 
-function getResourceHref(item, index) {
+function getResourceItemHref(item, index) {
   if (item?.placeholder) return "#resources";
   const category = normalizeCategory(item?.type);
   if (category === "clientcases") return item.body || "index.html#stories";
-  if (category === "documents") return item.body || "#";
+  if (category === "documents") return item.body || "document-list.html";
   return `resource-detail.html?resource=${index}`;
+}
+
+function getResourceRepositoryHref(item, label = "") {
+  const category = normalizeCategory(label || item?.type);
+  if (category === "news") return "news-list.html";
+  if (category === "clientcases") return "case-list.html";
+  if (category === "documents") return "document-list.html";
+  return "#resources";
+}
+
+function getResourceMoreLabel(label = "") {
+  return "Read more";
 }
 
 function getFeaturedResourceCards() {
@@ -254,16 +291,72 @@ function renderAbout() {
   `).join("");
 }
 
+
+
+
+const DEFAULT_FOOTER_HREFS = {
+  "integrated enterprise management system": "solution-detail.html?solution=0",
+  "iot platform": "solution-detail.html?solution=1",
+  "ai video analysis": "solution-detail.html?solution=2",
+  "drone inspection": "solution-detail.html?solution=3",
+  "patrolling robot": "solution-detail.html?solution=4",
+  "integrated smart place solution": "solution-detail.html?solution=5",
+  "who we are": "company-history.html",
+  "contact us": "contact-us.html",
+  "contact": "contact-us.html"
+};
+
+function getFooterLinkParts(link) {
+  if (typeof link === "object" && link) {
+    return { label: link.label || link.title || "", href: link.href || "#" };
+  }
+  const [label, href = ""] = String(link || "").split(">").map((part) => part.trim());
+  const fallback = DEFAULT_FOOTER_HREFS[label.toLowerCase()] || "#";
+  return { label, href: href || fallback };
+}
+
+function footerLinkHtml(link) {
+  const { label, href } = getFooterLinkParts(link);
+  if (!label) return "";
+  const external = /^https?:///i.test(href);
+  return `<a href="${esc(href)}" ${external ? 'target="_blank" rel="noopener"' : ""}>${esc(label)}</a>`;
+}
+
+function footerSubscribeHtml() {
+  return `
+    <div class="footer-column-extra">
+      <h3>Keep in touch</h3>
+      <form class="footer-subscribe" data-request-form data-form-type="Footer keep in touch">
+        <input type="email" name="email" placeholder="Work email" aria-label="Work email" required>
+        <button class="button small" type="submit">Subscribe</button>
+      </form>
+    </div>
+  `;
+}
+
+function footerSocialHtml() {
+  return `
+    <div class="footer-column-extra">
+      <h3>Follow us</h3>
+      <nav class="social-links" aria-label="Social links">
+        <a href="https://www.linkedin.com/company/seeingflow/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 9H3.7v11h2.8V9ZM5.1 4a1.7 1.7 0 1 0 0 3.4A1.7 1.7 0 0 0 5.1 4Zm15.2 9.7c0-3-1.6-4.9-4.2-4.9-1.9 0-2.8 1-3.2 1.8V9h-2.8v11h2.8v-5.8c0-1.7.8-2.8 2.3-2.8 1.4 0 2.2 1 2.2 2.8V20h2.9v-6.3Z"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.2 8.2V6.6c0-.8.5-1 1.1-1h1.9V2.4c-.9-.1-1.8-.2-2.7-.2-2.8 0-4.7 1.7-4.7 4.8v1.2H6.8v3.6h3V22h4.4V11.8h3.1l.5-3.6h-3.6Z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.1a3 3 0 0 0-2.1-2.1C17.7 4.5 12 4.5 12 4.5S6.3 4.5 4.5 5a3 3 0 0 0-2.1 2.1C2 9 2 12 2 12s0 3 .4 4.9a3 3 0 0 0 2.1 2.1c1.8.5 7.5.5 7.5.5s5.7 0 7.5-.5a3 3 0 0 0 2.1-2.1C22 15 22 12 22 12s0-3-.4-4.9ZM10 15.4V8.6l5.8 3.4-5.8 3.4Z"/></svg></a>
+      </nav>
+    </div>
+  `;
+}
+
 function renderFooter() {
-  text("contactTitle", data.contact.title);
-  text("contactText", data.contact.text);
   text("footerBrand", data.brandName);
   text("footerText", data.footerText);
   text("copyright", `© ${new Date().getFullYear()} ${data.brandName}`);
-  $("footerColumns").innerHTML = data.footerColumns.map((column) => `
+  $("footerColumns").innerHTML = data.footerColumns.map((column, index) => `
     <div>
       <h3>${esc(column.title)}</h3>
-      ${column.links.map((link) => `<a href="#">${esc(link)}</a>`).join("")}
+      ${column.links.map(footerLinkHtml).join("")}
+      ${index === 1 ? footerSubscribeHtml() : ""}
+      ${index === 2 ? footerSocialHtml() : ""}
     </div>
   `).join("");
 }

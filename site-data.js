@@ -22,8 +22,8 @@ const DEFAULT_SITE_DATA = {
   "headerCta": "Contact us",
   "hero": {
     "eyebrow": "Smart place solution provider",
-    "title": "Your market-leading Smart place solution",
-    "text": "Unlock an integrated human–machine collaborative smart-place management platform. By integrating cutting-edge AI and IoT technologies, it enables people and robots to jointly operate and manage places such as cities, public infrastructure, commercial buildings, residential compounds and industrial parks — laying the groundwork for the future era of human–robot co-working.",
+    "title": "Your market-leading smart place solution",
+    "text": "Seeingflow delivers an integrated smart place management platform where people, AI, IoT devices and robots work together to operate cities, public infrastructure, commercial buildings, residential communities and industrial parks with greater visibility, automation and control.",
     "image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=80",
     "primaryCta": "Request a demo",
     "secondaryCta": "Explore our solutions"
@@ -78,10 +78,10 @@ const DEFAULT_SITE_DATA = {
   "resources": [
     {
       "type": "News",
-      "title": "Seeingflow expands smart-space solution portfolio",
-      "text": "Company news and product updates from Seeingflow's smart-space technology roadmap.",
+      "title": "Seeingflow expands smart place solution portfolio",
+      "text": "Company news and product updates from Seeingflow's smart place technology roadmap.",
       "image": "https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=1200&q=80",
-      "body": "Seeingflow continues to expand its smart-space solution portfolio across enterprise asset management, IoT connectivity, AI video analysis, drone inspection, and patrolling robot operations.",
+      "body": "Seeingflow continues to expand its smart place solution portfolio across enterprise asset management, IoT connectivity, AI video analysis, drone inspection and patrolling robot operations.",
       "layout": "split"
     },
     {
@@ -98,7 +98,8 @@ const DEFAULT_SITE_DATA = {
       "text": "A ppt deck in pdf format updated in Jan 2026.",
       "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
       "body": "documents/sfd-scs-2601.pdf",
-      "layout": "split"
+      "layout": "split",
+      "date": "2026-01"
     }
   ],
   "solutionsTitle": "Proven, valuable and actionable smart place solutions.",
@@ -118,7 +119,7 @@ const DEFAULT_SITE_DATA = {
       "text": "An integrated platform for connecting sensors, BMS systems, cameras, and smart devices across buildings and spaces.",
       "cta": "Learn more",
       "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
-      "body": "Our IoT Platform connects field devices, sensors, BMS systems, cameras, gateways, and smart equipment into a single data layer. It enables real-time monitoring, device integration, alerts, automation, and operational visibility across complex smart-space environments.",
+      "body": "Our IoT Platform connects field devices, sensors, BMS systems, cameras, gateways and smart equipment into a single data layer. It enables real-time monitoring, device integration, alerts, automation and operational visibility across complex smart place environments.",
       "layout": "panel",
       "relatedResources": []
     },
@@ -150,11 +151,11 @@ const DEFAULT_SITE_DATA = {
       "relatedResources": []
     },
     {
-      "title": "Integrated Smart Space Solutions",
-      "text": "A complete smart-space solution that combines asset management, IoT, AI video, drones, and robots.",
+      "title": "Integrated Smart Place Solution",
+      "text": "A complete smart place solution that combines asset management, IoT, AI video, drones and robots.",
       "cta": "Learn more",
       "image": "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=80",
-      "body": "Our Integrated Smart Space Solutions combine enterprise asset management, IoT connectivity, AI video analysis, drone inspection, and patrolling robots into one coordinated operating model. The solution helps organisations build connected, intelligent, and responsive spaces with unified command, automation, and data-driven decision support.",
+      "body": "Our Integrated Smart Place Solution combines enterprise asset management, IoT connectivity, AI video analysis, drone inspection and patrolling robots into one coordinated operating model. The solution helps organizations build connected, intelligent and responsive places with unified command, automation and data-driven decision support.",
       "layout": "editorial",
       "relatedResources": []
     }
@@ -167,9 +168,9 @@ const DEFAULT_SITE_DATA = {
   },
   "about": {
     "title": "About us",
-    "intro": "Seeingflow is a global intelligence technology provider headquartered in Singapore, with an R&D hub in Shenzhen, China, and market-expansion & delivery centers in Hong Kong, Shanghai, ASEAN and ME countries. We specialize in human–machine collaborative smart-space management systems. By integrating cutting-edge AI and IoT technologies, we enable people and robots to jointly operate and manage cities, public infrastructure, commercial buildings, residential compounds and industrial parks—laying the groundwork for the future era of human–robot co-working.",
+    "intro": "Seeingflow is a global intelligent technology provider headquartered in Singapore, with an R&D hub in Shenzhen and market expansion and delivery centers in Hong Kong, Shanghai, ASEAN and the Middle East. We specialize in human-machine collaborative smart place management systems. By integrating AI and IoT technologies, we enable people, devices and robots to jointly operate cities, public infrastructure, commercial buildings, residential communities and industrial parks.",
     "historyTitle": "Our history",
-    "historyText": "Seeingflow is an intelligence technology solution provider headquartered in Singapore and market-expansion & delivery centers across Asia, Middle East, and North America. \nOur company was set up in 2020 with a clear mission: build a central brain platform, where mankind and machines are working together to manage and operate places such as public infrastructure, commercial buildings, residential compounds and industrial parks. Most works are done by robots and we just need to give commands.",
+    "historyText": "Seeingflow was founded in 2020 with a clear mission: to build the central intelligence platform for smart place operations.\nOur platform helps people, machines and robots work together to manage public infrastructure, commercial buildings, residential communities and industrial parks with greater efficiency, safety and operational visibility.",
     "cardImages": {
       "history": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80",
       "leadership": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80",
@@ -254,12 +255,22 @@ const DEFAULT_SITE_DATA = {
     ]
   },
   "customersTitle": "What customers say",
+  "featuredStoryIndexes": [
+    0,
+    1,
+    2
+  ],
   "stories": [
     {
       "title": "University campus transformation",
       "image": "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80",
       "brief": "A university team connected campus services, maintenance and space planning in one operational view.",
       "caseIntro": "The client needed a clearer way to coordinate campus operations across buildings, service teams and long-term planning. The project focused on improving visibility, response times and data quality while keeping the daily experience simple for teams on the ground.",
+      "projectFocus": [
+        "Operational visibility",
+        "Process consistency",
+        "Better data for decisions"
+      ],
       "layout": "split"
     },
     {
@@ -267,6 +278,11 @@ const DEFAULT_SITE_DATA = {
       "image": "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1200&q=80",
       "brief": "A healthcare estate team improved operational clarity across critical facilities.",
       "caseIntro": "The organisation wanted a more reliable way to manage assets, maintenance tasks and facility information. The solution helped teams prioritise work, track progress and support safer, more efficient environments.",
+      "projectFocus": [
+        "Critical facility operations",
+        "Maintenance prioritisation",
+        "Service reliability"
+      ],
       "layout": "panel"
     },
     {
@@ -274,6 +290,11 @@ const DEFAULT_SITE_DATA = {
       "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
       "brief": "A commercial real estate portfolio gained clearer insight into properties, service activity and planning decisions.",
       "caseIntro": "The client needed better visibility across a distributed property portfolio. The project introduced a more consistent operating model for data, reporting and cross-team collaboration.",
+      "projectFocus": [
+        "Portfolio reporting",
+        "Cross-team coordination",
+        "Asset planning"
+      ],
       "layout": "editorial"
     }
   ],
@@ -282,19 +303,19 @@ const DEFAULT_SITE_DATA = {
     {
       "title": "Solutions",
       "links": [
-        "IWMS",
-        "Asset Management",
-        "Space Management",
-        "Sustainability"
+        "Integrated enterprise management system",
+        "IoT platform",
+        "AI video analysis",
+        "Drone inspection",
+        "Patrolling robot",
+        "Integrated smart place solution"
       ]
     },
     {
       "title": "Company",
       "links": [
         "Who we are",
-        "Careers",
-        "Partners",
-        "Contact"
+        "Contact us"
       ]
     },
     {
@@ -318,3 +339,12 @@ function getSiteData() {
 function saveSiteData(data) {
   localStorage.setItem(SITE_DATA_KEY, JSON.stringify(data));
 }
+
+document.addEventListener("click", (event) => {
+  const link = event.target.closest(".footer-columns a[href]");
+  if (!link) return;
+  const href = link.getAttribute("href");
+  if (!href || href === "#") return;
+  event.preventDefault();
+  window.location.href = href;
+});

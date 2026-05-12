@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-label="CCTV frame with computer vision detection boxes">
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#dce7ef"/>
+      <stop offset=".58" stop-color="#b9c9d5"/>
+      <stop offset="1" stop-color="#687b88"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#657179"/>
+      <stop offset="1" stop-color="#313b42"/>
+    </linearGradient>
+    <filter id="softNoise">
+      <feTurbulence baseFrequency=".7" numOctaves="2" seed="7" type="fractalNoise"/>
+      <feColorMatrix type="saturate" values=".18"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 .08"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" mode="multiply"/>
+    </filter>
+  </defs>
+  <rect width="1400" height="900" fill="#0a1730"/>
+  <g filter="url(#softNoise)">
+    <rect x="0" y="0" width="1400" height="900" fill="url(#sky)"/>
+    <path d="M0 545h1400v355H0z" fill="url(#road)"/>
+    <path d="M0 530c220-70 398-64 560-22 148 38 300 44 462-13 139-48 249-54 378-13v93H0z" fill="#50646f" opacity=".8"/>
+    <path d="M125 185h220v345H125z" fill="#6c7a82"/>
+    <path d="M168 232h45v52h-45zm70 0h45v52h-45zm-70 84h45v52h-45zm70 0h45v52h-45zm-70 84h45v52h-45zm70 0h45v52h-45z" fill="#c6d5dc" opacity=".72"/>
+    <path d="M375 270h310v270H375z" fill="#73828b"/>
+    <path d="M420 316h70v68h-70zm96 0h70v68h-70zm96 0h42v68h-42zm-192 98h70v68h-70zm96 0h70v68h-70zm96 0h42v68h-42z" fill="#d1dde2" opacity=".68"/>
+    <path d="M780 220h280v330H780z" fill="#5e6e79"/>
+    <path d="M830 270h58v64h-58zm82 0h58v64h-58zm-82 95h58v64h-58zm82 95h58v64h-58z" fill="#cbd9df" opacity=".72"/>
+    <path d="M1100 325h190v225h-190z" fill="#7a878b"/>
+    <path d="M1138 368h42v54h-42zm58 0h42v54h-42zm-58 76h42v54h-42zm58 0h42v54h-42z" fill="#cfdbdf" opacity=".65"/>
+    <path d="M120 680c160-36 312-52 470-55 205-4 412 10 690 65v210H120z" fill="#27323a" opacity=".72"/>
+    <path d="M605 900l155-343h92L1020 900z" fill="#77838b" opacity=".8"/>
+    <path d="M690 900l86-343h42l94 343z" fill="#eef1e6" opacity=".82"/>
+    <path d="M536 672c28-15 77-15 103 2l55 38c16 11 9 40-12 42l-194 19c-32 3-47-38-20-55z" fill="#1f2930"/>
+    <circle cx="536" cy="771" r="32" fill="#111820"/>
+    <circle cx="660" cy="760" r="32" fill="#111820"/>
+    <path d="M825 648c42-14 112-14 158 3l73 28c24 9 27 43 5 56l-42 26H806l-35-38c-19-20-7-56 20-64z" fill="#1e2830"/>
+    <circle cx="840" cy="768" r="34" fill="#10171d"/>
+    <circle cx="1012" cy="768" r="34" fill="#10171d"/>
+    <g fill="#253038">
+      <path d="M284 582c22 0 43 19 43 43v86h-92v-86c0-24 24-43 49-43z"/>
+      <circle cx="283" cy="546" r="33"/>
+      <path d="M383 612c17 0 33 15 33 35v67h-72v-67c0-20 18-35 39-35z"/>
+      <circle cx="382" cy="584" r="25"/>
+      <path d="M1130 590c23 0 44 21 44 47v76h-96v-76c0-26 24-47 52-47z"/>
+      <circle cx="1129" cy="551" r="34"/>
+    </g>
+  </g>
+  <rect x="30" y="30" width="1340" height="840" fill="none" stroke="#ffffff" stroke-opacity=".28" stroke-width="2"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-weight="700">
+    <rect x="72" y="60" width="238" height="40" rx="4" fill="#0b1f33" opacity=".78"/>
+    <text x="92" y="86" fill="#d6f7ff" font-size="22">CAM 04 / NORTH GATE</text>
+    <rect x="1126" y="60" width="200" height="40" rx="4" fill="#0b1f33" opacity=".78"/>
+    <text x="1146" y="86" fill="#8fc31f" font-size="22">LIVE ANALYTICS</text>
+  </g>
+  <g fill="none" stroke-width="5" font-family="Arial, Helvetica, sans-serif" font-weight="700">
+    <rect x="220" y="510" width="132" height="234" stroke="#8fc31f"/>
+    <rect x="342" y="573" width="98" height="156" stroke="#8fc31f"/>
+    <rect x="484" y="640" width="238" height="156" stroke="#27d7ff"/>
+    <rect x="762" y="605" width="328" height="206" stroke="#27d7ff"/>
+    <rect x="1060" y="510" width="142" height="230" stroke="#8fc31f"/>
+    <text x="220" y="496" fill="#8fc31f" font-size="28">PERSON 97%</text>
+    <text x="342" y="558" fill="#8fc31f" font-size="24">PERSON 91%</text>
+    <text x="484" y="626" fill="#27d7ff" font-size="26">VEHICLE 94%</text>
+    <text x="762" y="590" fill="#27d7ff" font-size="26">VEHICLE 96%</text>
+    <text x="1060" y="496" fill="#8fc31f" font-size="28">PERSON 95%</text>
+  </g>
+  <g opacity=".86">
+    <path d="M42 838h450" stroke="#8fc31f" stroke-width="5"/>
+    <path d="M42 820h210" stroke="#27d7ff" stroke-width="5"/>
+    <text x="42" y="800" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">AI event detection: people, vehicles, dwell time</text>
+  </g>
+</svg>

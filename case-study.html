@@ -11,7 +11,7 @@
       <a class="brand" href="index.html" aria-label="Home"><img id="logoImage" alt=""><span id="brandName"></span></a>
       <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">Menu</button>
       <nav class="main-nav" id="mainNav"></nav>
-      <div class="header-actions"><a class="button small" id="headerCta" href="index.html#contact"></a></div>
+      <div class="header-actions"><a class="button small" id="headerCta" href="index.html#footer"></a></div>
     </header>
 
     <nav class="breadcrumbs" aria-label="Breadcrumb">
@@ -24,34 +24,29 @@
         <div class="case-hero-copy">
           <span class="eyebrow">Client case</span>
           <h1 id="caseTitle"></h1>
-          <p id="caseBrief"></p>
+          <div id="caseBrief"></div>
         </div>
       </section>
       <section class="case-content" id="caseContent">
         <div class="case-intro">
           <span class="eyebrow">Case intro</span>
           <h2 id="caseIntroTitle"></h2>
-          <p id="caseIntroText"></p>
-          <a class="button" href="index.html#contact">Request a demo</a>
+          <div id="caseIntroText" class="rich-text"></div>
+          <a class="button" href="index.html#footer">Request a demo</a>
         </div>
         <aside class="case-aside">
           <h3>Project focus</h3>
-          <ul>
-            <li>Operational visibility</li>
-            <li>Process consistency</li>
-            <li>Better data for decisions</li>
-          </ul>
+          <ul id="caseProjectFocus"></ul>
         </aside>
       </section>
     </main>
 
     <footer class="site-footer" id="footer">
       <div class="footer-brand"><h2 id="footerBrand"></h2><p id="footerText"></p></div>
-      <div class="footer-columns" id="footerColumns"></div>
-      <div class="footer-bottom"><span id="copyright"></span></div>
+      <div class="footer-columns" id="footerColumns"></div><div class="footer-bottom"><span id="copyright"></span></div>
     </footer>
 
-    <script src="site-data.js"></script>
+    <script src="site-data.js"></script><script src="request-submit.js?v=3"></script>
     <script src="case-study.js"></script>
   </body>
 </html>
