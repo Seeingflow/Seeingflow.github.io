@@ -356,7 +356,7 @@ const DEFAULT_SITE_DATA = {
     },
     {
       "title": "Onewo: robot patrolling solution",
-      "image": "http://www.zjrob.com/upload/2021/1029/1635475316429815.jpg",
+      "image": "https://www.zjrob.com/upload/2021/1029/1635475316429815.jpg",
       "brief": "We deployed 24/7 weather-proof autonomous patrol robots with real-time incident reporting capabilities for a Beijing residential community, boosting patrol efficiency, cutting costs, and enabling the property team to shift focus to resident-focused value-added services.",
       "caseIntro": "We provided a smart patrol robot solution for a residential community in Beijing. The robots are capable of autonomous patrol along pre-defined routes. Equipped with advanced smart sensors and cameras, they can promptly detect irregularities or incidents and automatically report them to the property management team. Operating 24/7 regardless of weather conditions, the solution has significantly improved on-site patrol efficiency and reduced operational costs. It also frees up property management personnel from routine tasks, allowing them to focus on value-added services for residents.",
       "projectFocus": [
@@ -429,7 +429,13 @@ function getSiteData() {
   }
   try {
     const saved = localStorage.getItem(SITE_DATA_KEY);
-    return saved ? mergeSiteData(DEFAULT_SITE_DATA, JSON.parse(saved)) : structuredClone(DEFAULT_SITE_DATA);
+    const data = saved ? mergeSiteData(DEFAULT_SITE_DATA, JSON.parse(saved)) : structuredClone(DEFAULT_SITE_DATA);
+    (data.stories || []).forEach((story) => {
+      if (story.image === "http://www.zjrob.com/upload/2021/1029/1635475316429815.jpg") {
+        story.image = "https://www.zjrob.com/upload/2021/1029/1635475316429815.jpg";
+      }
+    });
+    return data;
   } catch {
     return structuredClone(DEFAULT_SITE_DATA);
   }
