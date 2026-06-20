@@ -79,7 +79,7 @@ function renderShell() {
   }
   $("mainNav").innerHTML = data.menu.filter((item) => !item.label.toLowerCase().includes("contact")).map((item) => {
     const lower = item.label.toLowerCase();
-    const href = lower.includes("about") ? "index.html#about" : `index.html${item.href}`;
+    const href = lower.includes("about") ? "index.html?v=documents-20260620#about" : `index.html?v=documents-20260620${item.href}`;
     return `<a href="${esc(href)}">${esc(item.label)}</a>`;
   }).join("");
   text("headerCta", "Contact us");
