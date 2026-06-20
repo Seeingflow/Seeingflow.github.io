@@ -13,6 +13,20 @@ function normalizeCategory(value = "") {
   return String(value).toLowerCase().replace(/[^a-z]/g, "");
 }
 
+function ensureVideoCloudWhitePaper() {
+  const path = "documents/sfd-wp-vcs-2606.pdf";
+  if (data.resources.some((item) => item?.body === path)) return;
+  data.resources.push({
+    type: "Documents",
+    title: "Seeingflow Video Cloud Solution White Paper",
+    text: "An overview of Seeingflow's video cloud platform for secure, scalable video access, management and intelligent operations.",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
+    body: path,
+    layout: "split",
+    date: "2026-06"
+  });
+}
+
 
 
 
@@ -155,5 +169,6 @@ function renderDocuments() {
   `;
 }
 
+ensureVideoCloudWhitePaper();
 renderShell();
 renderDocuments();
