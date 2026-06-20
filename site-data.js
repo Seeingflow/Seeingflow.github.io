@@ -96,6 +96,15 @@ const DEFAULT_SITE_DATA = {
     },
     {
       "type": "Documents",
+      "title": "Seeingflow Video Cloud Solution White Paper",
+      "text": "An overview of Seeingflow's video cloud platform for secure, scalable video access, management and intelligent operations.",
+      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
+      "body": "documents/sfd-wp-vcs-2606.pdf",
+      "layout": "split",
+      "date": "2026-06"
+    },
+    {
+      "type": "Documents",
       "title": "Seeingflow General Introduction",
       "text": "A ppt deck that introduces Seeingflow, pdf format, updated in Mar 2026.",
       "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
@@ -423,13 +432,30 @@ function mergeSiteData(defaults, saved) {
   return saved ?? defaults;
 }
 
+function ensureVideoCloudWhitePaper(data) {
+  const path = "documents/sfd-wp-vcs-2606.pdf";
+  if (!Array.isArray(data.resources) || data.resources.some((item) => item?.body === path)) return;
+  data.resources.push({
+    type: "Documents",
+    title: "Seeingflow Video Cloud Solution White Paper",
+    text: "An overview of Seeingflow's video cloud platform for secure, scalable video access, management and intelligent operations.",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
+    body: path,
+    layout: "split",
+    date: "2026-06"
+  });
+}
+
 function getSiteData() {
   if (window.location.protocol !== "file:") {
-    return structuredClone(DEFAULT_SITE_DATA);
+    const data = structuredClone(DEFAULT_SITE_DATA);
+    ensureVideoCloudWhitePaper(data);
+    return data;
   }
   try {
     const saved = localStorage.getItem(SITE_DATA_KEY);
     const data = saved ? mergeSiteData(DEFAULT_SITE_DATA, JSON.parse(saved)) : structuredClone(DEFAULT_SITE_DATA);
+    ensureVideoCloudWhitePaper(data);
     (data.stories || []).forEach((story) => {
       if (/^https?:\/\/www\.zjrob\.com\/upload\/2021\/1029\/1635475316429815\.jpg$/i.test(story.image || "")) {
         story.image = "assets/uploads/onewo-patrol-robot.jpg";
