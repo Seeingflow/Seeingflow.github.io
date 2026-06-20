@@ -19,7 +19,7 @@ function normalizeCategory(value = "") {
 function redirectCategoryResource() {
   const category = normalizeCategory(resource.type);
   if (category === "documents") {
-    window.location.replace("document-list.html");
+    window.location.replace("document-list.html?v=video-cloud-20260620");
     return;
   }
   if (category === "clientcases" && resource.body) {

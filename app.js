@@ -161,7 +161,7 @@ function getResourceRepositoryHref(item, label = "") {
   const category = normalizeCategory(label || item?.type);
   if (category === "news") return "news-list.html";
   if (category === "clientcases") return "case-list.html";
-  if (category === "documents") return "document-list.html";
+  if (category === "documents") return "document-list.html?v=video-cloud-20260620";
   return "#resources";
 }
 
