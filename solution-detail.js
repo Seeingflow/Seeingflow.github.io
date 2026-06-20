@@ -80,7 +80,7 @@ function renderShell() {
     logo.hidden = true;
   }
   $("mainNav").innerHTML = data.menu.filter((item) => !item.label.toLowerCase().includes("contact")).map((item) => {
-    const href = `index.html?v=documents-20260620${item.href}`;
+    const href = `home-20260620.html${item.href}`;
     return `<a href="${esc(href)}">${esc(item.label)}</a>`;
   }).join("");
   text("headerCta", "Contact us");
@@ -120,7 +120,7 @@ function renderSolution() {
         <strong>${esc(resource.title)}</strong>
       </a>
     `).join("")
-    : `<a class="related-resource-card" href="index.html?v=documents-20260620#resources"><strong>Browse all resources</strong></a>`;
+    : `<a class="related-resource-card" href="home-20260620.html#resources"><strong>Browse all resources</strong></a>`;
 }
 
 renderShell();

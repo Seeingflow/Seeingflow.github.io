@@ -152,7 +152,7 @@ function prepareLocalDocumentLinks() {
 function getResourceItemHref(item, index) {
   if (item?.placeholder) return "#resources";
   const category = normalizeCategory(item?.type);
-  if (category === "clientcases") return item.body || "index.html?v=documents-20260620#stories";
+  if (category === "clientcases") return item.body || "home-20260620.html#stories";
   if (category === "documents") return item.body || "document-list.html";
   return `resource-detail.html?resource=${index}`;
 }
