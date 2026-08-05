@@ -96,6 +96,46 @@ const DEFAULT_SITE_DATA = {
     },
     {
       "type": "Documents",
+      "title": "Seeingflow Footfall Counting Device",
+      "text": "Intelligent people counting device leverages camera vision algorithms to accurately calculate real-time pedestrian flow for building operation analysis.",
+      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
+      "body": "documents/sfd-pd-footfall-2607.pdf",
+      "layout": "split",
+      "date": "2026-07",
+      "label": "Product"
+    },
+    {
+      "type": "Documents",
+      "title": "Seeingflow Integrated Enterprise Asset Management Platform",
+      "text": "All-in-one property and asset management platform realizes unified management of property operation and asset lifecycle; its SaaS edition supports out-of-the-box deployment to lower project launch costs.",
+      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
+      "body": "documents/sfd-pd-ieam-2607.pdf",
+      "layout": "split",
+      "date": "2026-07",
+      "label": "Product"
+    },
+    {
+      "type": "Documents",
+      "title": "Seeingflow Access Control Product Line",
+      "text": "A full lineup of access control products built upon unified ID credentials, enabling one-identity pass access across all gates and areas of the premises.",
+      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
+      "body": "documents/sfd-pd-ac-2607.pdf",
+      "layout": "split",
+      "date": "2026-07",
+      "label": "Product"
+    },
+    {
+      "type": "Documents",
+      "title": "Seeingflow AI Patrol Robot",
+      "text": "AI-powered security robot performs autonomous patrol round the clock, automatically identifying abnormal events and filling security monitoring blind spots.",
+      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
+      "body": "documents/sfd-pd-patrolbot-2607.pdf",
+      "layout": "split",
+      "date": "2026-07",
+      "label": "Product"
+    },
+    {
+      "type": "Documents",
       "title": "Seeingflow Video Cloud Solution White Paper",
       "text": "An overview of Seeingflow's video cloud platform for secure, scalable video access, management and intelligent operations.",
       "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
