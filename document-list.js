@@ -37,7 +37,8 @@ const DOCUMENT_LABELS_BY_TITLE = {
   "seeingflow saas user guide": "Product",
   "seeingflow general introduction": "General"
 };
-let activeDocumentLabel = "All";
+const requestedDocumentLabel = new URLSearchParams(window.location.search).get("label") || "All";
+let activeDocumentLabel = DOCUMENT_LABELS.includes(requestedDocumentLabel) ? requestedDocumentLabel : "All";
 
 
 const DEFAULT_FOOTER_HREFS = {
@@ -176,11 +177,23 @@ function renderDocumentFilters(documents) {
       <strong>${counts[label] || 0}</strong>
     </button>
   `).join("");
-  target.querySelectorAll("[data-document-filter]").forEach((button) => {
-    button.addEventListener("click", () => {
-      activeDocumentLabel = button.dataset.documentFilter || "All";
-      renderDocuments();
-    });
+}
+
+function bindDocumentFilters() {
+  const target = $("documentFilters");
+  if (!target) return;
+  target.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-document-filter]");
+    if (!button || !target.contains(button)) return;
+    activeDocumentLabel = button.dataset.documentFilter || "All";
+    const url = new URL(window.location.href);
+    if (activeDocumentLabel === "All") {
+      url.searchParams.delete("label");
+    } else {
+      url.searchParams.set("label", activeDocumentLabel);
+    }
+    window.history.replaceState({}, "", url);
+    renderDocuments();
   });
 }
 
@@ -221,4 +234,5 @@ function renderDocuments() {
 
 ensureVideoCloudWhitePaper();
 renderShell();
+bindDocumentFilters();
 renderDocuments();
