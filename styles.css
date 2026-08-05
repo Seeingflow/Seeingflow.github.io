@@ -974,6 +974,9 @@ h3 { font-size: 21px; }
   box-shadow: 0 4px 12px rgba(9, 31, 65, .05);
   transition: border-color .2s ease, box-shadow .2s ease;
 }
+.document-item[hidden] {
+  display: none !important;
+}
 .document-item:hover {
   border-color: rgba(12, 84, 164, .35);
   box-shadow: 0 10px 20px rgba(9, 31, 65, .08);
