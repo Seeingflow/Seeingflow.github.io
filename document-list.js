@@ -23,11 +23,21 @@ function ensureVideoCloudWhitePaper() {
     image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
     body: path,
     layout: "split",
-    date: "2026-06"
+    date: "2026-06",
+    label: "Solution"
   });
 }
 
-
+const DOCUMENT_LABELS = ["All", "General", "Solution", "Product"];
+const DOCUMENT_LABELS_BY_TITLE = {
+  "seeingflow video cloud solution white paper": "Solution",
+  "seeingflow smart carpark solution": "Solution",
+  "seeingflow ai camera solution white paper": "Solution",
+  "seeingflow iot platform white paper": "Product",
+  "seeingflow saas user guide": "Product",
+  "seeingflow general introduction": "General"
+};
+let activeDocumentLabel = "All";
 
 
 const DEFAULT_FOOTER_HREFS = {
@@ -139,18 +149,58 @@ function getFileLabel(item) {
   return extension ? extension.toUpperCase() : "FILE";
 }
 
-function renderDocuments() {
-  const documents = data.resources
+function getDocumentLabel(item) {
+  const value = String(item.label || item.documentLabel || "").trim();
+  if (DOCUMENT_LABELS.includes(value)) return value;
+  const key = String(item.title || "").trim().toLowerCase();
+  return DOCUMENT_LABELS_BY_TITLE[key] || "General";
+}
+
+function getAllDocuments() {
+  return data.resources
     .filter((item) => normalizeCategory(item.type) === "documents")
     .sort((a, b) => getDocumentTimestamp(b) - getDocumentTimestamp(a));
+}
 
-  text("documentCount", `${documents.length} ${documents.length === 1 ? "file" : "files"} available`);
+function renderDocumentFilters(documents) {
+  const target = $("documentFilters");
+  if (!target) return;
+  const counts = documents.reduce((acc, item) => {
+    const label = getDocumentLabel(item);
+    acc[label] = (acc[label] || 0) + 1;
+    return acc;
+  }, { All: documents.length });
+  target.innerHTML = DOCUMENT_LABELS.map((label) => `
+    <button class="document-filter ${activeDocumentLabel === label ? "active" : ""}" type="button" data-document-filter="${esc(label)}" aria-pressed="${activeDocumentLabel === label}">
+      <span>${esc(label)}</span>
+      <strong>${counts[label] || 0}</strong>
+    </button>
+  `).join("");
+  target.querySelectorAll("[data-document-filter]").forEach((button) => {
+    button.addEventListener("click", () => {
+      activeDocumentLabel = button.dataset.documentFilter || "All";
+      renderDocuments();
+    });
+  });
+}
+
+function renderDocuments() {
+  const allDocuments = getAllDocuments();
+  const documents = activeDocumentLabel === "All"
+    ? allDocuments
+    : allDocuments.filter((item) => getDocumentLabel(item) === activeDocumentLabel);
+
+  renderDocumentFilters(allDocuments);
+  text("documentCount", activeDocumentLabel === "All"
+    ? `${documents.length} ${documents.length === 1 ? "file" : "files"} available`
+    : `${documents.length} ${documents.length === 1 ? "file" : "files"} in ${activeDocumentLabel}`);
   $("documentList").innerHTML = documents.length ? documents.map((item, index) => `
     <article class="document-item ${index === 0 ? "featured-document" : ""}">
       <div class="document-file-icon">${esc(getFileLabel(item))}</div>
       <div>
         <div class="document-meta">
           <span>${esc(getDocumentDateValue(item) || "Undated")}</span>
+          <span>${esc(getDocumentLabel(item))}</span>
           ${index === 0 ? "<span>Latest</span>" : ""}
         </div>
         <h3>${esc(item.title)}</h3>

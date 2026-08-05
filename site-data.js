@@ -101,7 +101,8 @@ const DEFAULT_SITE_DATA = {
       "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
       "body": "documents/sfd-wp-vcs-2606.pdf",
       "layout": "split",
-      "date": "2026-06"
+      "date": "2026-06",
+      "label": "Solution"
     },
     {
       "type": "Documents",
@@ -110,7 +111,8 @@ const DEFAULT_SITE_DATA = {
       "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
       "body": "documents/sfd-intro-2603.pdf",
       "layout": "split",
-      "date": "2026-03"
+      "date": "2026-03",
+      "label": "General"
     },
     {
       "type": "Documents",
@@ -119,7 +121,8 @@ const DEFAULT_SITE_DATA = {
       "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
       "body": "documents/sfd-scs-2601.pdf",
       "layout": "split",
-      "date": "2026-01"
+      "date": "2026-01",
+      "label": "Solution"
     },
     {
       "type": "Documents",
@@ -128,7 +131,8 @@ const DEFAULT_SITE_DATA = {
       "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
       "body": "documents/sfd-sm-2503.pdf",
       "layout": "split",
-      "date": "2025-03"
+      "date": "2025-03",
+      "label": "Product"
     },
     {
       "type": "Documents",
@@ -137,7 +141,8 @@ const DEFAULT_SITE_DATA = {
       "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
       "body": "documents/sfd-wp-iot-2412.pdf",
       "layout": "split",
-      "date": "2024-12"
+      "date": "2024-12",
+      "label": "Product"
     },
     {
       "type": "Documents",
@@ -146,7 +151,8 @@ const DEFAULT_SITE_DATA = {
       "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
       "body": "documents/sfd-wp-ac-2407.pdf",
       "layout": "split",
-      "date": "2024-07"
+      "date": "2024-07",
+      "label": "Solution"
     }
   ],
   "solutionsTitle": "Proven, valuable and actionable smart place solutions.",
@@ -442,7 +448,26 @@ function ensureVideoCloudWhitePaper(data) {
     image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
     body: path,
     layout: "split",
-    date: "2026-06"
+    date: "2026-06",
+    label: "Solution"
+  });
+}
+
+const DOCUMENT_LABELS_BY_TITLE = {
+  "seeingflow video cloud solution white paper": "Solution",
+  "seeingflow smart carpark solution": "Solution",
+  "seeingflow ai camera solution white paper": "Solution",
+  "seeingflow iot platform white paper": "Product",
+  "seeingflow saas user guide": "Product",
+  "seeingflow general introduction": "General"
+};
+
+function applyDocumentLabels(data) {
+  if (!Array.isArray(data.resources)) return;
+  data.resources.forEach((item) => {
+    if (!item || String(item.type || "").toLowerCase() !== "documents") return;
+    const key = String(item.title || "").trim().toLowerCase();
+    item.label = item.label || DOCUMENT_LABELS_BY_TITLE[key] || "General";
   });
 }
 
@@ -450,12 +475,14 @@ function getSiteData() {
   if (window.location.protocol !== "file:") {
     const data = structuredClone(DEFAULT_SITE_DATA);
     ensureVideoCloudWhitePaper(data);
+    applyDocumentLabels(data);
     return data;
   }
   try {
     const saved = localStorage.getItem(SITE_DATA_KEY);
     const data = saved ? mergeSiteData(DEFAULT_SITE_DATA, JSON.parse(saved)) : structuredClone(DEFAULT_SITE_DATA);
     ensureVideoCloudWhitePaper(data);
+    applyDocumentLabels(data);
     (data.stories || []).forEach((story) => {
       if (/^https?:\/\/www\.zjrob\.com\/upload\/2021\/1029\/1635475316429815\.jpg$/i.test(story.image || "")) {
         story.image = "assets/uploads/onewo-patrol-robot.jpg";
