@@ -19,7 +19,7 @@ function normalizeCategory(value = "") {
 function redirectCategoryResource() {
   const category = normalizeCategory(resource.type);
   if (category === "documents") {
-    window.location.replace("document-library-filtered-20260805.html");
+    window.location.replace("document-library-final-20260805.html");
     return;
   }
   if (category === "clientcases" && resource.body) {
