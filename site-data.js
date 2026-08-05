@@ -493,6 +493,58 @@ function ensureVideoCloudWhitePaper(data) {
   });
 }
 
+const JULY_PRODUCT_DOCUMENTS = [
+  {
+    type: "Documents",
+    title: "Seeingflow Footfall Counting Device",
+    text: "Intelligent people counting device leverages camera vision algorithms to accurately calculate real-time pedestrian flow for building operation analysis.",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
+    body: "documents/sfd-pd-footfall-2607.pdf",
+    layout: "split",
+    date: "2026-07",
+    label: "Product"
+  },
+  {
+    type: "Documents",
+    title: "Seeingflow Integrated Enterprise Asset Management Platform",
+    text: "All-in-one property and asset management platform realizes unified management of property operation and asset lifecycle; its SaaS edition supports out-of-the-box deployment to lower project launch costs.",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
+    body: "documents/sfd-pd-ieam-2607.pdf",
+    layout: "split",
+    date: "2026-07",
+    label: "Product"
+  },
+  {
+    type: "Documents",
+    title: "Seeingflow Access Control Product Line",
+    text: "A full lineup of access control products built upon unified ID credentials, enabling one-identity pass access across all gates and areas of the premises.",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
+    body: "documents/sfd-pd-ac-2607.pdf",
+    layout: "split",
+    date: "2026-07",
+    label: "Product"
+  },
+  {
+    type: "Documents",
+    title: "Seeingflow AI Patrol Robot",
+    text: "AI-powered security robot performs autonomous patrol round the clock, automatically identifying abnormal events and filling security monitoring blind spots.",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
+    body: "documents/sfd-pd-patrolbot-2607.pdf",
+    layout: "split",
+    date: "2026-07",
+    label: "Product"
+  }
+];
+
+function ensureJulyProductDocuments(data) {
+  if (!Array.isArray(data.resources)) return;
+  JULY_PRODUCT_DOCUMENTS.forEach((documentItem) => {
+    if (!data.resources.some((item) => item?.body === documentItem.body)) {
+      data.resources.push(structuredClone(documentItem));
+    }
+  });
+}
+
 const DOCUMENT_LABELS_BY_TITLE = {
   "seeingflow video cloud solution white paper": "Solution",
   "seeingflow smart carpark solution": "Solution",
@@ -515,6 +567,7 @@ function getSiteData() {
   if (window.location.protocol !== "file:") {
     const data = structuredClone(DEFAULT_SITE_DATA);
     ensureVideoCloudWhitePaper(data);
+    ensureJulyProductDocuments(data);
     applyDocumentLabels(data);
     return data;
   }
@@ -522,6 +575,7 @@ function getSiteData() {
     const saved = localStorage.getItem(SITE_DATA_KEY);
     const data = saved ? mergeSiteData(DEFAULT_SITE_DATA, JSON.parse(saved)) : structuredClone(DEFAULT_SITE_DATA);
     ensureVideoCloudWhitePaper(data);
+    ensureJulyProductDocuments(data);
     applyDocumentLabels(data);
     (data.stories || []).forEach((story) => {
       if (/^https?:\/\/www\.zjrob\.com\/upload\/2021\/1029\/1635475316429815\.jpg$/i.test(story.image || "")) {
