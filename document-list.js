@@ -193,22 +193,33 @@ function bindDocumentFilters() {
       url.searchParams.set("label", activeDocumentLabel);
     }
     window.history.replaceState({}, "", url);
-    renderDocuments();
+    applyDocumentFilter();
   });
+}
+
+function applyDocumentFilter() {
+  let visible = 0;
+  document.querySelectorAll("[data-document-filter]").forEach((button) => {
+    const active = button.dataset.documentFilter === activeDocumentLabel;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+  document.querySelectorAll("[data-document-label]").forEach((item) => {
+    const show = activeDocumentLabel === "All" || item.dataset.documentLabel === activeDocumentLabel;
+    item.hidden = !show;
+    if (show) visible += 1;
+  });
+  text("documentCount", activeDocumentLabel === "All"
+    ? `${visible} ${visible === 1 ? "file" : "files"} available`
+    : `${visible} ${visible === 1 ? "file" : "files"} in ${activeDocumentLabel}`);
 }
 
 function renderDocuments() {
   const allDocuments = getAllDocuments();
-  const documents = activeDocumentLabel === "All"
-    ? allDocuments
-    : allDocuments.filter((item) => getDocumentLabel(item) === activeDocumentLabel);
 
   renderDocumentFilters(allDocuments);
-  text("documentCount", activeDocumentLabel === "All"
-    ? `${documents.length} ${documents.length === 1 ? "file" : "files"} available`
-    : `${documents.length} ${documents.length === 1 ? "file" : "files"} in ${activeDocumentLabel}`);
-  $("documentList").innerHTML = documents.length ? documents.map((item, index) => `
-    <article class="document-item ${index === 0 ? "featured-document" : ""}">
+  $("documentList").innerHTML = allDocuments.length ? allDocuments.map((item, index) => `
+    <article class="document-item ${index === 0 ? "featured-document" : ""}" data-document-label="${esc(getDocumentLabel(item))}">
       <div class="document-file-icon">${esc(getFileLabel(item))}</div>
       <div>
         <div class="document-meta">
@@ -230,6 +241,7 @@ function renderDocuments() {
       </div>
     </article>
   `;
+  applyDocumentFilter();
 }
 
 ensureVideoCloudWhitePaper();
