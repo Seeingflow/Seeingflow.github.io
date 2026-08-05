@@ -1,0 +1,250 @@
+const data = getSiteData();
+const $ = (id) => document.getElementById(id);
+const text = (id, value) => { $(id).textContent = value || ""; };
+const esc = (value = "") => String(value).replace(/[&<>"']/g, (char) => ({
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#39;"
+})[char]);
+
+function normalizeCategory(value = "") {
+  return String(value).toLowerCase().replace(/[^a-z]/g, "");
+}
+
+function ensureVideoCloudWhitePaper() {
+  const path = "documents/sfd-wp-vcs-2606.pdf";
+  if (data.resources.some((item) => item?.body === path)) return;
+  data.resources.push({
+    type: "Documents",
+    title: "Seeingflow Video Cloud Solution White Paper",
+    text: "An overview of Seeingflow's video cloud platform for secure, scalable video access, management and intelligent operations.",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
+    body: path,
+    layout: "split",
+    date: "2026-06",
+    label: "Solution"
+  });
+}
+
+const DOCUMENT_LABELS = ["All", "General", "Solution", "Product"];
+const DOCUMENT_LABELS_BY_TITLE = {
+  "seeingflow video cloud solution white paper": "Solution",
+  "seeingflow smart carpark solution": "Solution",
+  "seeingflow ai camera solution white paper": "Solution",
+  "seeingflow iot platform white paper": "Product",
+  "seeingflow saas user guide": "Product",
+  "seeingflow general introduction": "General"
+};
+const requestedDocumentLabel = new URLSearchParams(window.location.search).get("label") || "All";
+let activeDocumentLabel = DOCUMENT_LABELS.includes(requestedDocumentLabel) ? requestedDocumentLabel : "All";
+
+
+const DEFAULT_FOOTER_HREFS = {
+  "integrated enterprise management system": "solution-detail.html?solution=0",
+  "iot platform": "solution-detail.html?solution=1",
+  "ai video analysis": "solution-detail.html?solution=2",
+  "drone inspection": "solution-detail.html?solution=3",
+  "patrolling robot": "solution-detail.html?solution=4",
+  "integrated smart place solution": "solution-detail.html?solution=5",
+  "who we are": "company-history.html",
+  "contact us": "contact-us.html",
+  "contact": "contact-us.html"
+};
+
+function getFooterLinkParts(link) {
+  if (typeof link === "object" && link) {
+    return { label: link.label || link.title || "", href: link.href || "#" };
+  }
+  const [label, href = ""] = String(link || "").split(">").map((part) => part.trim());
+  const fallback = DEFAULT_FOOTER_HREFS[label.toLowerCase()] || "#";
+  return { label, href: href || fallback };
+}
+
+function footerLinkHtml(link) {
+  const { label, href } = getFooterLinkParts(link);
+  if (!label) return "";
+  const external = /^https?:\/\//i.test(href);
+  return `<a href="${esc(href)}" ${external ? 'target="_blank" rel="noopener"' : ""}>${esc(label)}</a>`;
+}
+
+function footerSubscribeHtml() {
+  return `
+    <div class="footer-column-extra">
+      <h3>Keep in touch</h3>
+      <form class="footer-subscribe" data-request-form data-form-type="Footer keep in touch">
+        <input type="email" name="email" placeholder="Work email" aria-label="Work email" required>
+        <button class="button small" type="submit">Subscribe</button>
+      </form>
+    </div>
+  `;
+}
+
+function footerSocialHtml() {
+  return `
+    <div class="footer-column-extra">
+      <h3>Follow us</h3>
+      <nav class="social-links" aria-label="Social links">
+        <a href="https://www.linkedin.com/company/seeingflow/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 9H3.7v11h2.8V9ZM5.1 4a1.7 1.7 0 1 0 0 3.4A1.7 1.7 0 0 0 5.1 4Zm15.2 9.7c0-3-1.6-4.9-4.2-4.9-1.9 0-2.8 1-3.2 1.8V9h-2.8v11h2.8v-5.8c0-1.7.8-2.8 2.3-2.8 1.4 0 2.2 1 2.2 2.8V20h2.9v-6.3Z"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.2 8.2V6.6c0-.8.5-1 1.1-1h1.9V2.4c-.9-.1-1.8-.2-2.7-.2-2.8 0-4.7 1.7-4.7 4.8v1.2H6.8v3.6h3V22h4.4V11.8h3.1l.5-3.6h-3.6Z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.1a3 3 0 0 0-2.1-2.1C17.7 4.5 12 4.5 12 4.5S6.3 4.5 4.5 5a3 3 0 0 0-2.1 2.1C2 9 2 12 2 12s0 3 .4 4.9a3 3 0 0 0 2.1 2.1c1.8.5 7.5.5 7.5.5s5.7 0 7.5-.5a3 3 0 0 0 2.1-2.1C22 15 22 12 22 12s0-3-.4-4.9ZM10 15.4V8.6l5.8 3.4-5.8 3.4Z"/></svg></a>
+      </nav>
+    </div>
+  `;
+}
+
+function renderShell() {
+  const logo = $("logoImage");
+  text("brandName", "");
+  if (data.logo) {
+    logo.src = data.logo;
+    logo.alt = `${data.brandName} logo`;
+    logo.hidden = false;
+  } else {
+    logo.hidden = true;
+  }
+  $("mainNav").innerHTML = data.menu.filter((item) => !item.label.toLowerCase().includes("contact")).map((item) => {
+    const href = `home-20260620.html${item.href}`;
+    return `<a href="${esc(href)}">${esc(item.label)}</a>`;
+  }).join("");
+  text("headerCta", "Contact us");
+  $("headerCta").href = "contact-us.html";
+  text("footerBrand", data.brandName);
+  text("footerText", data.footerText);
+  text("copyright", `© ${new Date().getFullYear()} ${data.brandName}`);
+  $("footerColumns").innerHTML = data.footerColumns.map((column, index) => `
+    <div>
+      <h3>${esc(column.title)}</h3>
+      ${column.links.map(footerLinkHtml).join("")}
+      ${index === 1 ? footerSubscribeHtml() : ""}
+      ${index === 2 ? footerSocialHtml() : ""}
+    </div>
+  `).join("");
+  document.querySelector(".nav-toggle").addEventListener("click", (event) => {
+    const open = document.body.classList.toggle("nav-open");
+    event.currentTarget.setAttribute("aria-expanded", String(open));
+  });
+}
+
+function getDocumentDateValue(item) {
+  return String(item.date || "").trim();
+}
+
+function getDocumentTimestamp(item) {
+  const value = getDocumentDateValue(item);
+  if (!value) return 0;
+  const normalized = /^\d{4}-\d{2}$/.test(value) ? `${value}-01` : value;
+  const time = Date.parse(normalized);
+  return Number.isNaN(time) ? 0 : time;
+}
+
+function getDownloadFileName(item) {
+  const href = String(item.body || "");
+  const fileName = href.split("/").pop();
+  return fileName || `${String(item.title || "document").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}.pdf`;
+}
+
+function getFileLabel(item) {
+  const extension = getDownloadFileName(item).split(".").pop();
+  return extension ? extension.toUpperCase() : "FILE";
+}
+
+function getDocumentLabel(item) {
+  const value = String(item.label || item.documentLabel || "").trim();
+  if (DOCUMENT_LABELS.includes(value)) return value;
+  const key = String(item.title || "").trim().toLowerCase();
+  return DOCUMENT_LABELS_BY_TITLE[key] || "General";
+}
+
+function getAllDocuments() {
+  return data.resources
+    .filter((item) => normalizeCategory(item.type) === "documents")
+    .sort((a, b) => getDocumentTimestamp(b) - getDocumentTimestamp(a));
+}
+
+function renderDocumentFilters(documents) {
+  const target = $("documentFilters");
+  if (!target) return;
+  const counts = documents.reduce((acc, item) => {
+    const label = getDocumentLabel(item);
+    acc[label] = (acc[label] || 0) + 1;
+    return acc;
+  }, { All: documents.length });
+  target.innerHTML = DOCUMENT_LABELS.map((label) => `
+    <button class="document-filter ${activeDocumentLabel === label ? "active" : ""}" type="button" data-document-filter="${esc(label)}" aria-pressed="${activeDocumentLabel === label}">
+      <span>${esc(label)}</span>
+      <strong>${counts[label] || 0}</strong>
+    </button>
+  `).join("");
+}
+
+function bindDocumentFilters() {
+  const target = $("documentFilters");
+  if (!target) return;
+  target.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-document-filter]");
+    if (!button || !target.contains(button)) return;
+    activeDocumentLabel = button.dataset.documentFilter || "All";
+    const url = new URL(window.location.href);
+    if (activeDocumentLabel === "All") {
+      url.searchParams.delete("label");
+    } else {
+      url.searchParams.set("label", activeDocumentLabel);
+    }
+    window.history.replaceState({}, "", url);
+    applyDocumentFilter();
+  });
+}
+
+function applyDocumentFilter() {
+  let visible = 0;
+  document.querySelectorAll("[data-document-filter]").forEach((button) => {
+    const active = button.dataset.documentFilter === activeDocumentLabel;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+  document.querySelectorAll("[data-document-label]").forEach((item) => {
+    const show = activeDocumentLabel === "All" || item.dataset.documentLabel === activeDocumentLabel;
+    item.hidden = !show;
+    if (show) visible += 1;
+  });
+  text("documentCount", activeDocumentLabel === "All"
+    ? `${visible} ${visible === 1 ? "file" : "files"} available`
+    : `${visible} ${visible === 1 ? "file" : "files"} in ${activeDocumentLabel}`);
+}
+
+function renderDocuments() {
+  const allDocuments = getAllDocuments();
+
+  renderDocumentFilters(allDocuments);
+  $("documentList").innerHTML = allDocuments.length ? allDocuments.map((item, index) => `
+    <article class="document-item ${index === 0 ? "featured-document" : ""}" data-document-label="${esc(getDocumentLabel(item))}">
+      <div class="document-file-icon">${esc(getFileLabel(item))}</div>
+      <div>
+        <div class="document-meta">
+          <span>${esc(getDocumentDateValue(item) || "Undated")}</span>
+          <span>${esc(getDocumentLabel(item))}</span>
+          ${index === 0 ? "<span>Latest</span>" : ""}
+        </div>
+        <h3>${esc(item.title)}</h3>
+        <p>${esc(item.text)}</p>
+      </div>
+      <a class="button small" href="${esc(item.body || "#")}" download="${esc(getDownloadFileName(item))}" target="_blank" rel="noopener">Download</a>
+    </article>
+  `).join("") : `
+    <article class="document-item">
+      <div>
+        <span>No documents</span>
+        <h3>Add documents in admin</h3>
+        <p>Create document rows in the Resources admin section using the Documents category.</p>
+      </div>
+    </article>
+  `;
+  applyDocumentFilter();
+}
+
+ensureVideoCloudWhitePaper();
+renderShell();
+bindDocumentFilters();
+renderDocuments();
