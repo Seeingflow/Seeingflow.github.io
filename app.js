@@ -152,7 +152,7 @@ function getResourceItemHref(item, index) {
   if (item?.placeholder) return "#resources";
   const category = normalizeCategory(item?.type);
   if (category === "clientcases") return item.body || "home-20260620.html#stories";
-  if (category === "documents") return "document-library-20260620.html?v=document-labels-20260805";
+  if (category === "documents") return "document-library-filtered-20260805.html";
   return `resource-detail.html?resource=${index}`;
 }
 
@@ -160,7 +160,7 @@ function getResourceRepositoryHref(item, label = "") {
   const category = normalizeCategory(label || item?.type);
   if (category === "news") return "news-list.html";
   if (category === "clientcases") return "case-list.html";
-  if (category === "documents") return "document-library-20260620.html?v=document-labels-20260805";
+  if (category === "documents") return "document-library-filtered-20260805.html";
   return "#resources";
 }
 
